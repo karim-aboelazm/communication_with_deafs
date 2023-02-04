@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% load static django_bootstrap5 %}
+{% block title %}
+    Sign Language To Text
+{% endblock title %}
+
+
+{% block content %}
+    <div class="row pt-3" >
+       <div class="col-md-8 mx-auto bg-white p-3" style="border-radius: 25px;opacity:0.9;">
+            <form action=""  id="myform" class="text-center p-3 " enctype="multipart/form-data" method="post" >
+                {% csrf_token %}
+                {% bootstrap_form form %}
+                <button type="submit">Predict</button>    
+            </form>
+            <div class="row mx-auto text-center" id="result">
+                {% if prediction in numbers %}
+                <h3 class="text-center text-black-50 mb-3">Our prediction the Image for Number ' {{prediction}} '</h3>
+                {% else %}
+                <h3 class="text-center text-black-50 mb-3">Our prediction the Image for Letter ' {{prediction}} '</h3>
+                {% endif %}
+                <img src="http://127.0.0.1:8000{{im.image.url}}" class="mx-auto" style="width: 40%;border-radius:40px;" alt="" srcset="">
+            </div>
+            
+        </div>
+    </div>
+
+{% endblock content %}
+    
+    

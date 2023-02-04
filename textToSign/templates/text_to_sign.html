@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Text To Sign Language{% endblock title %}
+
+{% block content %}
+<div class="row mt-5 text-center">
+    <div class="col-md-8 mx-auto bg-white pt-5" style="opacity: 0.9;border-radius:25px"> 
+      <form action="/text-to-signlanguage/" id="myForm" class="col-md-12 mb-5 px-5" method="get">
+        <div class="mb-3">
+          <input type="text" class="form-control text-center py-3" style="border:1px solid;border-radius:25px;font-size:22px"  name="user_input" id="result" placeholder="Enter You Text">
+        </div>
+      </form> 
+      <div class="row">
+        <div class="col-md-4 mx-auto">
+          <button onclick="startConverting();" style="outline: none;border:none;background:none;"><i class="fa fa-microphone btn btn-danger" style="font-size:30px" aria-hidden="true" ></i></button>
+          <button type="submit" form="myForm" style="outline: none;border:none;background:none;"><i class="fa fa-asl-interpreting btn btn-success" style="font-size:30px" aria-hidden="true"></i></button>
+        </div>
+      </div>
+        {% if same|length == 0%}
+            <h3 class="text-muted mt-3">The translation will appear here!</h3>
+        {% else %}
+            {% if og|length > 0 %}
+            <h3 class="text-muted mt-3" id="list">'{{og}}' translates to</h3>
+            {% else %}
+            <h3 class="text-muted mt-3" id="list">Hello, Type any Text To Translate</h3>
+            {% endif %}
+            {% for s in same %}
+                {% if "/" in s%}
+                  {% if og|length > 0 %}
+                    <img src={{s}} class="beside" style="width:25%">
+                  {% else %}
+                    <img src="{% static 'img/hello.png' %}" class="beside" style="width:25%">
+                  {% endif %}
+                {% else %}
+                    <p class="signlanguage beside" style="color:rgb(121, 64, 4);"> {{ s }} </p>
+                {% endif %}
+            {% endfor %}
+        {% endif %}
+    </div>
+</div>
+{% endblock content %}
+    

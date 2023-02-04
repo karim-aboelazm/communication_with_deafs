@@ -1,0 +1,13 @@
+{% load static %}
+<html lang='en'>
+  <head>
+    <title>{% block title %}{% endblock title %}</title>
+    {% include 'snippets/head.html' %}
+  </head>
+  <body style="background-image:url({% static 'img/bg2.jpeg' %});background-position-y: top;background-attachment:fixed ;">
+    <div class="container py-4">
+      {% block content %}{% endblock content %}
+    </div>
+  {% include 'snippets/scripts.html' %}  
+  </body>
+</html>
